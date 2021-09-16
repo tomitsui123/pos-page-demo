@@ -131,9 +131,8 @@ const itemList = [
 
 const ReceiptPage = ({ result }: { result: any[] }) => {
   const detailedSelectedList = result.map((e) =>
-    itemList.find((item) => item.name == e)
+    itemList.find((item) => item.id == e)
   );
-  console.log(detailedSelectedList);
   return (
     <>
       <Container>
@@ -204,7 +203,7 @@ function App() {
   const [data, setData] = useState<number[]>([]);
   return isScan ? (
     <QrReader
-      delay={1300}
+      delay={500}
       onError={(err) => alert(err)}
       onScan={(data: string | null) => {
         if (data) {
@@ -223,7 +222,7 @@ function App() {
       >
         Scan
       </Button>
-      <ReceiptPage result={[]} />
+      <ReceiptPage result={data} />
     </>
   );
 }
