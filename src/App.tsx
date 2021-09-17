@@ -178,8 +178,8 @@ const ReceiptPage = ({ result }: { result: any[] }) => {
                     <Col style={{ fontWeight: "bold" }}>
                       $
                       {_.sum(
-                        result.map(
-                          (e) => itemList.find((item) => item.name == e)?.id
+                        detailedSelectedList.map(
+                          (e) => e?.price
                         )
                       ) || 0}
                     </Col>
