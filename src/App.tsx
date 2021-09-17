@@ -226,7 +226,7 @@ function App() {
       </Button>
       <ReceiptPage result={data} />
       <Button
-        style={{ width: "100%", position: "absolute", bottom: 0, height: 150 }}
+        style={{ width: "100%", position: "absolute", bottom: 0 }}
         onClick={() => {
           setData([]);
           alert("完成收款");
