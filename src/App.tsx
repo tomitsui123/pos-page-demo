@@ -142,9 +142,9 @@ const ReceiptPage = ({ result }: { result: any[] }) => {
               <Card.Text style={{ fontSize: 30, textAlign: "center" }}>
                 單號
               </Card.Text>
-              <Card.Title style={{ textAlign: "center", fontSize: 50 }}>
+              {result && <Card.Title style={{ textAlign: "center", fontSize: 50 }}>
                 001
-              </Card.Title>
+              </Card.Title>}
             </Card>
           </Col>
         </Row>
@@ -179,7 +179,7 @@ const ReceiptPage = ({ result }: { result: any[] }) => {
                       $
                       {_.sum(
                         result.map(
-                          (e) => itemList.find((item) => item.name == e)?.price
+                          (e) => itemList.find((item) => item.name == e)?.id
                         )
                       ) || 0}
                     </Col>
@@ -190,11 +190,6 @@ const ReceiptPage = ({ result }: { result: any[] }) => {
           </Col>
         </Row>
       </Container>
-      <Button
-        style={{ width: "100%", position: "absolute", bottom: 0, height: 150 }}
-      >
-        收錢
-      </Button>
     </>
   );
 };
@@ -208,7 +203,7 @@ function App() {
       onScan={(data: string | null) => {
         if (data) {
           setData(data?.split(",").map(Number));
-          setisScan(false)
+          setisScan(false);
         }
       }}
       style={{ width: "100%" }}
@@ -223,6 +218,15 @@ function App() {
         Scan
       </Button>
       <ReceiptPage result={data} />
+      <Button
+        style={{ width: "100%", position: "absolute", bottom: 0, height: 150 }}
+        onClick={() => {
+          setData([]);
+          alert("完成收款");
+        }}
+      >
+        收錢
+      </Button>
     </>
   );
 }
