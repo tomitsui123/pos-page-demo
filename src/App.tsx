@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import QrReader from "react-qr-reader";
-import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import { Container, Row, Col, Card, Button, Navbar } from "react-bootstrap";
 import _ from "lodash";
 
 const categoryList = [
@@ -142,9 +142,11 @@ const ReceiptPage = ({ result }: { result: any[] }) => {
               <Card.Text style={{ fontSize: 30, textAlign: "center" }}>
                 單號
               </Card.Text>
-              {result.length > 0 && <Card.Title style={{ textAlign: "center", fontSize: 50 }}>
-                001
-              </Card.Title>}
+              {result.length > 0 && (
+                <Card.Title style={{ textAlign: "center", fontSize: 50 }}>
+                  001
+                </Card.Title>
+              )}
             </Card>
           </Col>
         </Row>
@@ -176,12 +178,7 @@ const ReceiptPage = ({ result }: { result: any[] }) => {
                     </Col>
                     <Col />
                     <Col style={{ fontWeight: "bold" }}>
-                      $
-                      {_.sum(
-                        detailedSelectedList.map(
-                          (e) => e?.price
-                        )
-                      ) || 0}
+                      ${_.sum(detailedSelectedList.map((e) => e?.price)) || 0}
                     </Col>
                   </Row>
                 </Container>
@@ -197,17 +194,27 @@ function App() {
   const [isScan, setisScan] = useState(false);
   const [data, setData] = useState<number[]>([]);
   return isScan ? (
-    <QrReader
-      delay={500}
-      onError={(err) => alert(err)}
-      onScan={(data: string | null) => {
-        if (data) {
-          setData(data?.split(",").map(Number));
-          setisScan(false);
-        }
-      }}
-      style={{ width: "100%" }}
-    />
+    <>
+      <Navbar bg="dark" variant="dark">
+        <Navbar.Brand
+          onClick={() => setisScan(false)}
+          style={{ padding: "0 30px" }}
+        >
+          {"<返回"}
+        </Navbar.Brand>
+      </Navbar>
+      <QrReader
+        delay={300}
+        onError={(err) => alert(err)}
+        onScan={(data: string | null) => {
+          if (data) {
+            setData(data?.split(",").map(Number));
+            setisScan(false);
+          }
+        }}
+        style={{ width: "100%" }}
+      />
+    </>
   ) : (
     <>
       <Button
