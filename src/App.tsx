@@ -142,7 +142,7 @@ const ReceiptPage = ({ result }: { result: any[] }) => {
               <Card.Text style={{ fontSize: 30, textAlign: "center" }}>
                 單號
               </Card.Text>
-              {result && <Card.Title style={{ textAlign: "center", fontSize: 50 }}>
+              {result.length > 0 && <Card.Title style={{ textAlign: "center", fontSize: 50 }}>
                 001
               </Card.Title>}
             </Card>
